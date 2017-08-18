@@ -1,6 +1,6 @@
 # mybatisGenerator
 
-## detail
+## 描述
 此工程提供了一个mybatis通过数据库的逆向工程。
 
 ## 使用
