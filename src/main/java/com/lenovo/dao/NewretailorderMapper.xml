@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lenovo.dao.NewretailorderMapper">
+  <resultMap id="BaseResultMap" type="com.lenovo.entity.Newretailorder">
+    <id column="OrderId" jdbcType="INTEGER" property="orderId" />
+    <result column="OrderSo" jdbcType="VARCHAR" property="orderSo" />
+    <result column="OrderStatus" jdbcType="SMALLINT" property="orderStatus" />
+    <result column="FlowStatus" jdbcType="SMALLINT" property="flowStatus" />
+    <result column="UserName" jdbcType="VARCHAR" property="userName" />
+    <result column="UserMobile" jdbcType="VARCHAR" property="userMobile" />
+    <result column="DeliverType" jdbcType="SMALLINT" property="deliverType" />
+    <result column="DeliverCompany" jdbcType="VARCHAR" property="deliverCompany" />
+    <result column="DeliverExpressNo" jdbcType="VARCHAR" property="deliverExpressNo" />
+    <result column="DeliverFee" jdbcType="DECIMAL" property="deliverFee" />
+    <result column="TotalPrice" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="TotalDiscount" jdbcType="DECIMAL" property="totalDiscount" />
+    <result column="TotalNutCount" jdbcType="DECIMAL" property="totalNutCount" />
+    <result column="RealAmount" jdbcType="DECIMAL" property="realAmount" />
+    <result column="OrderType" jdbcType="VARCHAR" property="orderType" />
+    <result column="SaleOrg" jdbcType="VARCHAR" property="saleOrg" />
+    <result column="PaymentChannel" jdbcType="VARCHAR" property="paymentChannel" />
+    <result column="SalerName" jdbcType="VARCHAR" property="salerName" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="PaymentTime" jdbcType="TIMESTAMP" property="paymentTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OrderId, OrderSo, OrderStatus, FlowStatus, UserName, UserMobile, DeliverType, DeliverCompany, 
+    DeliverExpressNo, DeliverFee, TotalPrice, TotalDiscount, TotalNutCount, RealAmount, 
+    OrderType, SaleOrg, PaymentChannel, SalerName, CreateTime, UpdateTime, PaymentTime
+  </sql>
+  <select id="selectByExample" parameterType="com.lenovo.entity.NewretailorderCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NewRetailOrder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from NewRetailOrder
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from NewRetailOrder
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lenovo.entity.NewretailorderCriteria">
+    delete from NewRetailOrder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lenovo.entity.Newretailorder">
+    insert into NewRetailOrder (OrderId, OrderSo, OrderStatus, 
+      FlowStatus, UserName, UserMobile, 
+      DeliverType, DeliverCompany, DeliverExpressNo, 
+      DeliverFee, TotalPrice, TotalDiscount, 
+      TotalNutCount, RealAmount, OrderType, 
+      SaleOrg, PaymentChannel, SalerName, 
+      CreateTime, UpdateTime, PaymentTime
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{orderSo,jdbcType=VARCHAR}, #{orderStatus,jdbcType=SMALLINT}, 
+      #{flowStatus,jdbcType=SMALLINT}, #{userName,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, 
+      #{deliverType,jdbcType=SMALLINT}, #{deliverCompany,jdbcType=VARCHAR}, #{deliverExpressNo,jdbcType=VARCHAR}, 
+      #{deliverFee,jdbcType=DECIMAL}, #{totalPrice,jdbcType=DECIMAL}, #{totalDiscount,jdbcType=DECIMAL}, 
+      #{totalNutCount,jdbcType=DECIMAL}, #{realAmount,jdbcType=DECIMAL}, #{orderType,jdbcType=VARCHAR}, 
+      #{saleOrg,jdbcType=VARCHAR}, #{paymentChannel,jdbcType=VARCHAR}, #{salerName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lenovo.entity.Newretailorder">
+    insert into NewRetailOrder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        OrderId,
+      </if>
+      <if test="orderSo != null">
+        OrderSo,
+      </if>
+      <if test="orderStatus != null">
+        OrderStatus,
+      </if>
+      <if test="flowStatus != null">
+        FlowStatus,
+      </if>
+      <if test="userName != null">
+        UserName,
+      </if>
+      <if test="userMobile != null">
+        UserMobile,
+      </if>
+      <if test="deliverType != null">
+        DeliverType,
+      </if>
+      <if test="deliverCompany != null">
+        DeliverCompany,
+      </if>
+      <if test="deliverExpressNo != null">
+        DeliverExpressNo,
+      </if>
+      <if test="deliverFee != null">
+        DeliverFee,
+      </if>
+      <if test="totalPrice != null">
+        TotalPrice,
+      </if>
+      <if test="totalDiscount != null">
+        TotalDiscount,
+      </if>
+      <if test="totalNutCount != null">
+        TotalNutCount,
+      </if>
+      <if test="realAmount != null">
+        RealAmount,
+      </if>
+      <if test="orderType != null">
+        OrderType,
+      </if>
+      <if test="saleOrg != null">
+        SaleOrg,
+      </if>
+      <if test="paymentChannel != null">
+        PaymentChannel,
+      </if>
+      <if test="salerName != null">
+        SalerName,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+      <if test="paymentTime != null">
+        PaymentTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSo != null">
+        #{orderSo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="flowStatus != null">
+        #{flowStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverType != null">
+        #{deliverType,jdbcType=SMALLINT},
+      </if>
+      <if test="deliverCompany != null">
+        #{deliverCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverExpressNo != null">
+        #{deliverExpressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverFee != null">
+        #{deliverFee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDiscount != null">
+        #{totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalNutCount != null">
+        #{totalNutCount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null">
+        #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrg != null">
+        #{saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentChannel != null">
+        #{paymentChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="salerName != null">
+        #{salerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null">
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lenovo.entity.NewretailorderCriteria" resultType="java.lang.Integer">
+    select count(*) from NewRetailOrder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update NewRetailOrder
+    <set>
+      <if test="record.orderId != null">
+        OrderId = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderSo != null">
+        OrderSo = #{record.orderSo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStatus != null">
+        OrderStatus = #{record.orderStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.flowStatus != null">
+        FlowStatus = #{record.flowStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.userName != null">
+        UserName = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null">
+        UserMobile = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverType != null">
+        DeliverType = #{record.deliverType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.deliverCompany != null">
+        DeliverCompany = #{record.deliverCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverExpressNo != null">
+        DeliverExpressNo = #{record.deliverExpressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverFee != null">
+        DeliverFee = #{record.deliverFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalPrice != null">
+        TotalPrice = #{record.totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalDiscount != null">
+        TotalDiscount = #{record.totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalNutCount != null">
+        TotalNutCount = #{record.totalNutCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realAmount != null">
+        RealAmount = #{record.realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderType != null">
+        OrderType = #{record.orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleOrg != null">
+        SaleOrg = #{record.saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentChannel != null">
+        PaymentChannel = #{record.paymentChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salerName != null">
+        SalerName = #{record.salerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paymentTime != null">
+        PaymentTime = #{record.paymentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update NewRetailOrder
+    set OrderId = #{record.orderId,jdbcType=INTEGER},
+      OrderSo = #{record.orderSo,jdbcType=VARCHAR},
+      OrderStatus = #{record.orderStatus,jdbcType=SMALLINT},
+      FlowStatus = #{record.flowStatus,jdbcType=SMALLINT},
+      UserName = #{record.userName,jdbcType=VARCHAR},
+      UserMobile = #{record.userMobile,jdbcType=VARCHAR},
+      DeliverType = #{record.deliverType,jdbcType=SMALLINT},
+      DeliverCompany = #{record.deliverCompany,jdbcType=VARCHAR},
+      DeliverExpressNo = #{record.deliverExpressNo,jdbcType=VARCHAR},
+      DeliverFee = #{record.deliverFee,jdbcType=DECIMAL},
+      TotalPrice = #{record.totalPrice,jdbcType=DECIMAL},
+      TotalDiscount = #{record.totalDiscount,jdbcType=DECIMAL},
+      TotalNutCount = #{record.totalNutCount,jdbcType=DECIMAL},
+      RealAmount = #{record.realAmount,jdbcType=DECIMAL},
+      OrderType = #{record.orderType,jdbcType=VARCHAR},
+      SaleOrg = #{record.saleOrg,jdbcType=VARCHAR},
+      PaymentChannel = #{record.paymentChannel,jdbcType=VARCHAR},
+      SalerName = #{record.salerName,jdbcType=VARCHAR},
+      CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      PaymentTime = #{record.paymentTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lenovo.entity.Newretailorder">
+    update NewRetailOrder
+    <set>
+      <if test="orderSo != null">
+        OrderSo = #{orderSo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        OrderStatus = #{orderStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="flowStatus != null">
+        FlowStatus = #{flowStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="userName != null">
+        UserName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        UserMobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverType != null">
+        DeliverType = #{deliverType,jdbcType=SMALLINT},
+      </if>
+      <if test="deliverCompany != null">
+        DeliverCompany = #{deliverCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverExpressNo != null">
+        DeliverExpressNo = #{deliverExpressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverFee != null">
+        DeliverFee = #{deliverFee,jdbcType=DECIMAL},
+      </if>
+      <if test="totalPrice != null">
+        TotalPrice = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDiscount != null">
+        TotalDiscount = #{totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalNutCount != null">
+        TotalNutCount = #{totalNutCount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null">
+        RealAmount = #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderType != null">
+        OrderType = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrg != null">
+        SaleOrg = #{saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentChannel != null">
+        PaymentChannel = #{paymentChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="salerName != null">
+        SalerName = #{salerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null">
+        PaymentTime = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lenovo.entity.Newretailorder">
+    update NewRetailOrder
+    set OrderSo = #{orderSo,jdbcType=VARCHAR},
+      OrderStatus = #{orderStatus,jdbcType=SMALLINT},
+      FlowStatus = #{flowStatus,jdbcType=SMALLINT},
+      UserName = #{userName,jdbcType=VARCHAR},
+      UserMobile = #{userMobile,jdbcType=VARCHAR},
+      DeliverType = #{deliverType,jdbcType=SMALLINT},
+      DeliverCompany = #{deliverCompany,jdbcType=VARCHAR},
+      DeliverExpressNo = #{deliverExpressNo,jdbcType=VARCHAR},
+      DeliverFee = #{deliverFee,jdbcType=DECIMAL},
+      TotalPrice = #{totalPrice,jdbcType=DECIMAL},
+      TotalDiscount = #{totalDiscount,jdbcType=DECIMAL},
+      TotalNutCount = #{totalNutCount,jdbcType=DECIMAL},
+      RealAmount = #{realAmount,jdbcType=DECIMAL},
+      OrderType = #{orderType,jdbcType=VARCHAR},
+      SaleOrg = #{saleOrg,jdbcType=VARCHAR},
+      PaymentChannel = #{paymentChannel,jdbcType=VARCHAR},
+      SalerName = #{salerName,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      PaymentTime = #{paymentTime,jdbcType=TIMESTAMP}
+    where OrderId = #{orderId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.lenovo.entity.Newretailorder">
+    <id column="orderId" jdbcType="INTEGER" property="orderId" />
+    <result column="orderSo" jdbcType="VARCHAR" property="orderSo" />
+    <result column="orderStatus" jdbcType="INTEGER" property="orderStatus" />
+    <result column="flowStatus" jdbcType="INTEGER" property="flowStatus" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="deliverType" jdbcType="INTEGER" property="deliverType" />
+    <result column="deliverCompany" jdbcType="VARCHAR" property="deliverCompany" />
+    <result column="deliverFee" jdbcType="VARCHAR" property="deliverFee" />
+    <result column="totalPrice" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="totalDiscount" jdbcType="DECIMAL" property="totalDiscount" />
+    <result column="totalNutCount" jdbcType="DECIMAL" property="totalNutCount" />
+    <result column="realAmount" jdbcType="DECIMAL" property="realAmount" />
+    <result column="orderType" jdbcType="VARCHAR" property="orderType" />
+    <result column="saleOrg" jdbcType="VARCHAR" property="saleOrg" />
+    <result column="paymentChannel" jdbcType="VARCHAR" property="paymentChannel" />
+    <result column="salerName" jdbcType="VARCHAR" property="salerName" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="paymentTime" jdbcType="TIMESTAMP" property="paymentTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    orderId, orderSo, orderStatus, flowStatus, userName, mobile, deliverType, deliverCompany, 
+    deliverFee, totalPrice, totalDiscount, totalNutCount, realAmount, orderType, saleOrg, 
+    paymentChannel, salerName, createTime, updateTime, paymentTime
+  </sql>
+  <select id="selectByExample" parameterType="com.lenovo.entity.NewretailorderCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NewRetailOrder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from NewRetailOrder
+    where orderId = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from NewRetailOrder
+    where orderId = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lenovo.entity.NewretailorderCriteria">
+    delete from NewRetailOrder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lenovo.entity.Newretailorder">
+    insert into NewRetailOrder (orderId, orderSo, orderStatus, 
+      flowStatus, userName, mobile, 
+      deliverType, deliverCompany, deliverFee, 
+      totalPrice, totalDiscount, totalNutCount, 
+      realAmount, orderType, saleOrg, 
+      paymentChannel, salerName, createTime, 
+      updateTime, paymentTime)
+    values (#{orderId,jdbcType=INTEGER}, #{orderSo,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, 
+      #{flowStatus,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{deliverType,jdbcType=INTEGER}, #{deliverCompany,jdbcType=VARCHAR}, #{deliverFee,jdbcType=VARCHAR}, 
+      #{totalPrice,jdbcType=DECIMAL}, #{totalDiscount,jdbcType=DECIMAL}, #{totalNutCount,jdbcType=DECIMAL}, 
+      #{realAmount,jdbcType=DECIMAL}, #{orderType,jdbcType=VARCHAR}, #{saleOrg,jdbcType=VARCHAR}, 
+      #{paymentChannel,jdbcType=VARCHAR}, #{salerName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lenovo.entity.Newretailorder">
+    insert into NewRetailOrder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        orderId,
+      </if>
+      <if test="orderSo != null">
+        orderSo,
+      </if>
+      <if test="orderStatus != null">
+        orderStatus,
+      </if>
+      <if test="flowStatus != null">
+        flowStatus,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="deliverType != null">
+        deliverType,
+      </if>
+      <if test="deliverCompany != null">
+        deliverCompany,
+      </if>
+      <if test="deliverFee != null">
+        deliverFee,
+      </if>
+      <if test="totalPrice != null">
+        totalPrice,
+      </if>
+      <if test="totalDiscount != null">
+        totalDiscount,
+      </if>
+      <if test="totalNutCount != null">
+        totalNutCount,
+      </if>
+      <if test="realAmount != null">
+        realAmount,
+      </if>
+      <if test="orderType != null">
+        orderType,
+      </if>
+      <if test="saleOrg != null">
+        saleOrg,
+      </if>
+      <if test="paymentChannel != null">
+        paymentChannel,
+      </if>
+      <if test="salerName != null">
+        salerName,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="paymentTime != null">
+        paymentTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSo != null">
+        #{orderSo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="flowStatus != null">
+        #{flowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverType != null">
+        #{deliverType,jdbcType=INTEGER},
+      </if>
+      <if test="deliverCompany != null">
+        #{deliverCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverFee != null">
+        #{deliverFee,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDiscount != null">
+        #{totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalNutCount != null">
+        #{totalNutCount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null">
+        #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrg != null">
+        #{saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentChannel != null">
+        #{paymentChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="salerName != null">
+        #{salerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null">
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lenovo.entity.NewretailorderCriteria" resultType="java.lang.Integer">
+    select count(*) from NewRetailOrder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update NewRetailOrder
+    <set>
+      <if test="record.orderId != null">
+        orderId = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderSo != null">
+        orderSo = #{record.orderSo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStatus != null">
+        orderStatus = #{record.orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowStatus != null">
+        flowStatus = #{record.flowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        userName = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverType != null">
+        deliverType = #{record.deliverType,jdbcType=INTEGER},
+      </if>
+      <if test="record.deliverCompany != null">
+        deliverCompany = #{record.deliverCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverFee != null">
+        deliverFee = #{record.deliverFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPrice != null">
+        totalPrice = #{record.totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalDiscount != null">
+        totalDiscount = #{record.totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalNutCount != null">
+        totalNutCount = #{record.totalNutCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realAmount != null">
+        realAmount = #{record.realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderType != null">
+        orderType = #{record.orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleOrg != null">
+        saleOrg = #{record.saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentChannel != null">
+        paymentChannel = #{record.paymentChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salerName != null">
+        salerName = #{record.salerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paymentTime != null">
+        paymentTime = #{record.paymentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update NewRetailOrder
+    set orderId = #{record.orderId,jdbcType=INTEGER},
+      orderSo = #{record.orderSo,jdbcType=VARCHAR},
+      orderStatus = #{record.orderStatus,jdbcType=INTEGER},
+      flowStatus = #{record.flowStatus,jdbcType=INTEGER},
+      userName = #{record.userName,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      deliverType = #{record.deliverType,jdbcType=INTEGER},
+      deliverCompany = #{record.deliverCompany,jdbcType=VARCHAR},
+      deliverFee = #{record.deliverFee,jdbcType=VARCHAR},
+      totalPrice = #{record.totalPrice,jdbcType=DECIMAL},
+      totalDiscount = #{record.totalDiscount,jdbcType=DECIMAL},
+      totalNutCount = #{record.totalNutCount,jdbcType=DECIMAL},
+      realAmount = #{record.realAmount,jdbcType=DECIMAL},
+      orderType = #{record.orderType,jdbcType=VARCHAR},
+      saleOrg = #{record.saleOrg,jdbcType=VARCHAR},
+      paymentChannel = #{record.paymentChannel,jdbcType=VARCHAR},
+      salerName = #{record.salerName,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      paymentTime = #{record.paymentTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lenovo.entity.Newretailorder">
+    update NewRetailOrder
+    <set>
+      <if test="orderSo != null">
+        orderSo = #{orderSo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        orderStatus = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="flowStatus != null">
+        flowStatus = #{flowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverType != null">
+        deliverType = #{deliverType,jdbcType=INTEGER},
+      </if>
+      <if test="deliverCompany != null">
+        deliverCompany = #{deliverCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverFee != null">
+        deliverFee = #{deliverFee,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        totalPrice = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDiscount != null">
+        totalDiscount = #{totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalNutCount != null">
+        totalNutCount = #{totalNutCount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null">
+        realAmount = #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderType != null">
+        orderType = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleOrg != null">
+        saleOrg = #{saleOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentChannel != null">
+        paymentChannel = #{paymentChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="salerName != null">
+        salerName = #{salerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentTime != null">
+        paymentTime = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where orderId = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lenovo.entity.Newretailorder">
+    update NewRetailOrder
+    set orderSo = #{orderSo,jdbcType=VARCHAR},
+      orderStatus = #{orderStatus,jdbcType=INTEGER},
+      flowStatus = #{flowStatus,jdbcType=INTEGER},
+      userName = #{userName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      deliverType = #{deliverType,jdbcType=INTEGER},
+      deliverCompany = #{deliverCompany,jdbcType=VARCHAR},
+      deliverFee = #{deliverFee,jdbcType=VARCHAR},
+      totalPrice = #{totalPrice,jdbcType=DECIMAL},
+      totalDiscount = #{totalDiscount,jdbcType=DECIMAL},
+      totalNutCount = #{totalNutCount,jdbcType=DECIMAL},
+      realAmount = #{realAmount,jdbcType=DECIMAL},
+      orderType = #{orderType,jdbcType=VARCHAR},
+      saleOrg = #{saleOrg,jdbcType=VARCHAR},
+      paymentChannel = #{paymentChannel,jdbcType=VARCHAR},
+      salerName = #{salerName,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      paymentTime = #{paymentTime,jdbcType=TIMESTAMP}
+    where orderId = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
