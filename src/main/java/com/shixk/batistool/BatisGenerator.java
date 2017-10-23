@@ -1,11 +1,4 @@
-///*******************************************************************************
-// * 项目名称   ： sharding2
-// * 文件名    ： BatisGenerator
-// *
-// * @copyright Copyright 2014-2016 联想(北京)有限公司 All Right Reserved.
-// * *****************************************************************************
-// * 注意： 本内容仅限于联想(北京)有限公司内部使用，禁止转发
-// ******************************************************************************/
+
 package com.shixk.batistool;
 //
 import org.mybatis.generator.api.MyBatisGenerator;
@@ -18,12 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Title: BatisGenerator
- * @Package com.lenovo.qimen.common
- * @Description: (用一句话描述该文件做什么)
- * @Author zhangyj21(zhangyj21@lenovo.com)
- * @Date 2016-11-04 14:44
- * @Version V1.0
+ * 生成入口
  */
 public class BatisGenerator {
     public static void main(String[] args) throws Exception {
