@@ -6,7 +6,7 @@
 // * *****************************************************************************
 // * 注意： 本内容仅限于联想(北京)有限公司内部使用，禁止转发
 // ******************************************************************************/
-package com.lenovo.batistool;
+package com.shixk.batistool;
 //
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
